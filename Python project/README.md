@@ -1,29 +1,19 @@
 # Project — Snake Ladder
 
-Creating a py game that plays a multiplayer game of snakes and ladders, use python 3.8. Using import function link time, sys, rendom, correctness check, and delivery would be appreciated.
-Rules:
+Creating a py game that plays a multiplayer game of snakes and ladders, use python 3.8. Using import function like time, sys, random and correctness check, and delivery would be appreciated.
+---
 
-## Motivation
+## Rules
 
-Snake-Ladder & Ludo is one of most common and popular game of childhood. Its coding is not much difficult however it will require considerable know- ledge on applets & graphics. This makes the project challenging yet approachable. So we decided to take up this as our project topic.
+ 1. The board will have 100 cells numbered from 1 to 100.
+ 2. The game is played with two dice instead of 1 and so the total dice value could be between 2 to 12 in a single move.
+ 3. Each player rolls the dice when their turn comes.
+ 4. Based on the dice value, the player moves their piece forward that number of cells.
+ 5. A player wins if it exactly reaches the position 100 and the game ends there.
+ 6. The board also contains some snakes and ladders.
+ 7. Each snake will have its head at some number and its tail at a smaller number.
+ 8. Whenever a piece ends up at a position with the head of the snake, the piece should go down to the position of the tail of that snake.
+ 9. Each ladder will have its start position at some number and end position at a larger number.
+ 10. Whenever a piece ends up at a position with the start of the ladder, the piece should go up to the position of the end of that ladder.
 
-```bash
-Project Link: https://github.com/projwal-srivastava-au9/python-project-projwal-srivastava-au9/blob/dev/Snake%20Ladder.py
-```
 
-## Usage
-
-```python
-Python 3.8 
-import time
-import random
-import sys 
-```
-
-## Contributing
-Pull requests are welcome. For major changes, please open an issue first to discuss what you would like to change.
-
-Please make sure to update tests as appropriate.
-
-## License
-[MIT](https://choosealicense.com/licenses/mit/)
