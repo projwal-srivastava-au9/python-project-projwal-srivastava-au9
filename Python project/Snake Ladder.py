@@ -3,10 +3,10 @@ import time
 import random
 import sys
 
-SLEEP_BETWEEN_ACTIONS = 1
+SLEEP_BETWEEN_ACTIONS = 0
 MAX_VAL = 100
 DICE_1 = 6
-DICE_2 = 6
+#DICE_2 = 6
 
 snakes = {
     18: 1,
@@ -62,12 +62,10 @@ ladder_jump = [
     "yaayyy"
 ]
 
-
 def welcome_msg():
     msg = """
     Welcome to Snake and Ladder Game.
     Version: 1.0.0
-
     Rules:
         1. The board will have 100 cells numbered from 1 to 100.
         2. The game is played with two dice instead of 1 and so the total dice value could be between 2 to 12 in a single move.
@@ -82,66 +80,52 @@ def welcome_msg():
         11. Each ladder will have its start position at some number and end position at a larger number.
         12. Whenever a piece ends up at a position with the start of the ladder, the piece should go up to the position of the end of that ladder.
         13. There could be another snake/ladder at the tail of the snake or the end position of the ladder and the piece should go up/down accordingly.
-
     """
     print(msg)
-
 
 def get_player_names():
     player1_name = None
     while not player1_name:
         player1_name = input("Please enter a valid name for first player: ").strip()
-
     player2_name = None
     while not player2_name:
         player2_name = input("Please enter a valid name for second player: ").strip()
-
     print("\nMatch will be played between '" + player1_name + "' and '" + player2_name + "'\n")
     return player1_name, player2_name
-
 
 def get_dice_value():
     time.sleep(SLEEP_BETWEEN_ACTIONS)
     dice_1 = random.randint(1, DICE_1)
-    dice_2 = random.randint(2, DICE_2)
-    dice_value = dice_1 + dice_2
-    print("1st Dice " + str(dice_1) + " & " + " 2nd Dice " + str(dice_2))
+    #dice_2 = random.randint(2, DICE_2)
+    dice_value = dice_1 
+    print("1st Dice " + str(dice_1) )
     return dice_value
-
 
 def got_snake_bite(old_value, current_value, player_name):
     print("\n" + random.choice(snake_bite).upper() + " ~~~~~~~~>")
     print("\n" + player_name + " got a snake bite. Down from " + str(old_value) + " to " + str(current_value))
 
-
 def got_ladder_jump(old_value, current_value, player_name):
     print("\n" + random.choice(ladder_jump).upper() + " ########")
     print("\n" + player_name + " climbed the ladder from " + str(old_value) + " to " + str(current_value))
-
 
 def snake_ladder(player_name, current_value, dice_value):
     time.sleep(SLEEP_BETWEEN_ACTIONS)
     old_value = current_value
     current_value = current_value + dice_value
-
     if current_value > MAX_VAL:
         print("You need " + str(MAX_VAL - old_value) + " to win this game. Keep trying.")
         return old_value
-
     print("\n" + player_name + " rolled a " + str(dice_value) + " and moved from " + str(old_value) + " to " + str(current_value))
     if current_value in snakes:
         final_value = snakes.get(current_value)
         got_snake_bite(current_value, final_value, player_name)
-
     elif current_value in ladders:
         final_value = ladders.get(current_value)
         got_ladder_jump(current_value, final_value, player_name)
-
     else:
         final_value = current_value
-
     return final_value
-
 
 def check_win(player_name, position):
     time.sleep(SLEEP_BETWEEN_ACTIONS)
@@ -151,13 +135,11 @@ def check_win(player_name, position):
         print("\nThank you for playing the game.\n")
         sys.exit(1)
 
-
 def start():
     welcome_msg()
     time.sleep(SLEEP_BETWEEN_ACTIONS)
     player1_name, player2_name = get_player_names()
     time.sleep(SLEEP_BETWEEN_ACTIONS)
-
     player1_current_position = 0
     player2_current_position = 0
 
@@ -169,20 +151,14 @@ def start():
         time.sleep(SLEEP_BETWEEN_ACTIONS)
         print(player1_name + " moving....")
         player1_current_position = snake_ladder(player1_name, player1_current_position, dice_value)
-
         check_win(player1_name, player1_current_position)
-
         input_2 = input("\n" + player2_name + ": " + random.choice(player_turn_text) + " Hit the enter to roll dice: ")
         print("\nRolling dice...")
         dice_value = get_dice_value()
         time.sleep(SLEEP_BETWEEN_ACTIONS)
         print(player2_name + " moving....")
         player2_current_position = snake_ladder(player2_name, player2_current_position, dice_value)
-
         check_win(player2_name, player2_current_position)
-
 
 if __name__ == "__main__":
     start()
-
-    
